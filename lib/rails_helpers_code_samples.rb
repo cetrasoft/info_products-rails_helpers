@@ -1,0 +1,8 @@
+require "rails_helpers_code_samples/version"
+require "rails_helpers_code_samples/description_list_helper"
+require "rails_helpers_code_samples/modal_v1_helper"
+require "rails_helpers_code_samples/modal_v2_helper"
+require "rails_helpers_code_samples/modal_v3_helper"
+
+module RailsHelpersCodeSamples
+end
