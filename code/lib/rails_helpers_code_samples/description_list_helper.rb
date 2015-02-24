@@ -1,6 +1,3 @@
-# Teachable Concept: 
-# Separate domain/project-specific helpers from generic ones. 
-# Build the former on top of the latter
 module RailsHelpersCodeSamples
   module DescriptionListHelper
 
@@ -19,5 +16,11 @@ module RailsHelpersCodeSamples
       description_list_pair(term, definition)
     end
 
+    def description_list_for(record, attributes, horizontal = false)
+      style = horizontal ? 'dl-horizontal' : ''
+      pairs = attributes.map { |a| description_list_pair_for(record, a) }
+
+      content_tag(:dl, safe_join(pairs), class: style)
+    end
   end
 end

@@ -1,0 +1,6 @@
+<h1 class='page-header'>Description Lists</h1>
+
+<% @person = OpenStruct.new(first_name: 'Carlos', last_name: 'Ramirez', email: 'carlos@cetrasoft.com') %>
+<% @attributes = [:first_name, :last_name, :email] %>
+
+<%= description_list_for @person, @attributes, true %>
