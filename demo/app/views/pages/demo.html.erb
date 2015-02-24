@@ -1,0 +1,27 @@
+<p>
+  <%= link_to 'example v1', 'javascript:void(0);', data: { toggle: 'modal', target: '#example1' } %>
+  <%= modal_v1 'example1', 'Modal Helper v1', 'Hello world!' %>  
+</p>
+
+<p>
+  <%= link_to 'example v2', 'javascript:void(0);', data: { toggle: 'modal', target: '#example2'} %>
+  <%= modal_v2 'example2', 'Modal Helper v2' do %>
+    <p><%= image_tag 'http://www.placehold.it/350x150' %></p>
+    <p>Hello world!</p>
+    <p>Hello Mom!</p>
+  <% end %>
+</p>
+
+<p>
+  <%= link_to 'example v3', 'javascript:void(0);', data: { toggle: 'modal', target: '#example3'} %>
+  <%= modal_v3 'example3', 'Modal Helper v3' do |m| %>
+    <% m.body do %>
+      <p><%= image_tag 'http://www.placehold.it/350x150' %></p>
+      <p>Hello world!</p>
+      <p>Hello Mom!</p>
+    <% end %>
+    <%= m.footer do %>
+      <p>This is the footer</p>
+    <% end %>
+  <% end %>
+</p>
