@@ -1,10 +1,8 @@
-# Teachable Concept: Calling methods on the helper within the content block
-
 module RailsHelpersCodeSamples
   module ModalV3Helper
 
     def modal_v3(id, title, &block)
-      modal = Modal.new(self, id, title, &block)
+      modal = Modal.new(self, id, title)
       capture(modal, &block)
       modal.html
     end

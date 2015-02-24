@@ -1,5 +1,3 @@
-# Teachable Concept: Passing a block for the content section
-
 module RailsHelpersCodeSamples
   module ModalV2Helper
 

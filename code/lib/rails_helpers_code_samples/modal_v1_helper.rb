@@ -1,7 +1,3 @@
-# Teachable Concept: using inner clas to represent the structure (parts of the HTML)
-
-# Decide: show the BAD way first? V0
-
 module RailsHelpersCodeSamples
   module ModalV1Helper
     
