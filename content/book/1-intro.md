@@ -6,7 +6,7 @@ If you're reading this, whether you're a novice, amateur, or professional develo
 
 **You're serious about being damn good at what you do and it feels fantastic to be at the top of your game!**
 
-Like you, we're always looking for ways to take our game to the next level, and once upon a time this brought us to reassess our Rails views and front-end code (largely in Bootstrap).
+Like you, we're always looking for ways to take our game to the next level, and once upon a time this brought us to reassess our Rails views and Bootstrap front-end code.
 
 As most Rails projects at the time, the state of things were somewhat of a systematic mess: our Rails helpers had become a dumping ground with no real organization, filled with ugly HTML and CSS classes. Our views were using these helpers, but simply to just hide code away elsewhere without leveraging any techniques to further reusability. Our usage of partials vs. helpers was wrong and inconsistent. 
 
