@@ -18,7 +18,6 @@ Bolded items named "Term" are wrapped in HTML5 **term elements**, specified in H
   <dd>Description</dd>
   <dt>Term</dt>
   <dd>Description</dd>
-  <dd>Description</dd>
   <dt>Term</dt>
   <dd>Description</dd>
 </dl>
@@ -34,13 +33,12 @@ Which looks like this in code:
 
 ```html
 <dl>
-  <dt>Id</dt>
-  <dd>12345</dd>
-  <dt>Name</dt>
+  <dt>First Name</dt>
   <dd>Ryan</dd>
+  <dt>Last Name</dt>
   <dd>Jafari</dd>
-  <dt>Location</dt>
-  <dd>New York, NY</dd>
+  <dt>Email</dt>
+  <dd>ryan@ryanandcarlos.com</dd>
 </dl>
 ```
 
@@ -292,4 +290,24 @@ Remember, you can keep using the smaller pieces (here the generic `description_l
 
 ### Further study
 
-A single `<dt>` can have multiple `<dd>`s. How might you extend the helper and its methods to support that?
+A single `<dt>` can have multiple `<dd>`s. Like so:
+
+![alt](../images/2-description_lists/example_4.png)
+
+Which in code looks like:
+
+```html
+<dl>
+  <dt>Id</dt>
+  <dd>12345</dd>
+  <dt>Name</dt>
+  <dd>Ryan</dd>
+  <dd>Jafari</dd>
+  <dt>Location</dt>
+  <dd>New York, NY</dd>
+</dl>
+```
+
+How might you extend the helper and its methods to support that?
+
+
