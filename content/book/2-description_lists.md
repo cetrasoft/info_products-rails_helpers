@@ -1,10 +1,10 @@
 # Description lists
 
-Part of Bootstrap's typography CSS, description lists make perfect sense as an initial example: simple, yet useful, especially when we want to print out information about an object. This is great for debugging and showing the user information about an application entity, for example, on a `show` page.
+Part of Bootstrap's typography CSS, description lists make perfect sense as an initial example: simple, yet useful. This is great for debugging and displaying information about an application entity such as a `User` on a `show` page, for example.
 
-Let's jump in and see just what we're talking about here!
+Let's jump in and see what we're talking about here!
 
-First, let's get familiar with the structure of a description list. If you already comfortable with Bootstrap, you may want to [skip ahead](#something). In Bootstrap, they look like this:
+First, let's get familiar with the structure of a description list. They look like this:
 
 ![alt](../images/2-description_lists/example_1.png)
 
@@ -56,7 +56,7 @@ Terms and their subsequent descriptions are now organized horizontally instead o
 
 Now that we've gotten you familiar with the structure of what we want our Rails helpers to output, we can dive into building the actual helpers themselves!
 
-# <a name="something"></a> The `DescriptionListHelper`
+# The `DescriptionListHelper`
 
 ## Context
 
