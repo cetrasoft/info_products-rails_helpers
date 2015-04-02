@@ -64,23 +64,10 @@ Before we dive into the helper code, let's set the stage for what we want to imp
 ```erb
 <h1>Description Lists</h1>
 
-<% @person = OpenStruct.new(first_name: 'Carlos', last_name: 'Ramirez', email: 'carlos@cetrasoft.com') %>
-<% @attributes = [:first_name, :last_name, :email] %>
-
-<%= description_list_for @person, @attributes, true %>
+<%= description_list_for @person, [:name, :age, :email], true %>
 ```
 
-Our eventual `description_list_for` helper will allow us to pass in an object (in this case, `@person`), an array of attributes (here, `@attributes`) and whether or not we want the description list to display horizontally (here we do, with `true`).
-
-And don't be afraid of old `OpenStruct` up there. That's just something we're doing here for demo purposes to allow us to create an object on the fly, without having to go into building a model. In real-world usage, you'd have a model defined elsewhere in your application, like you should. In that case, you'd be looking at simply:
-
-```erb
-<h1 class='page-header'>Description Lists</h1>
-
-<%= description_list_for @person, [:first_name, :last_name, :email], true %>
-```
-
-So just bear with us for the sake of the demo!
+Our eventual `description_list_for` helper shown here will allow us to pass in an object (in this case, `@person`), an array of attributes, and whether or not we want the description list to display horizontally (here we do, with `true`).
 
 ***PROTIP:*** You might be asking, like we once were:
 
@@ -95,7 +82,7 @@ Okay, so how do we build `description_list_for` already? Let's do it!
 We'll assume you know where to put your helper code (hint: it's in the helpers folder of your Rails project!) Set yourself up with something like this:
 
 ```ruby
-# app/views/helpers/description_list_helper.rb
+# app/helpers/description_list_helper.rb
 module RailsHelpersCodeSamples
   module DescriptionListHelper
     def description_list_for(record, attributes, horizontal = false)
@@ -116,13 +103,9 @@ Perfect! We're off to a good start then.
 For setup, let's right away get the style class for the description list (remember, the `<dl>` element), shall we?
 
 ```ruby
-module RailsHelpersCodeSamples
-  module DescriptionListHelper
-    
-    def description_list_for(record, attributes, horizontal = false)
-      style = horizontal ? 'dl-horizontal' : ''
-    end
-  
+module DescriptionListHelper
+  def description_list_for(record, attributes, horizontal = false)
+    style = horizontal ? 'dl-horizontal' : ''
   end
 end
 ```
