@@ -8,13 +8,13 @@ If you're reading this, whether you're a novice, amateur, or professional develo
 
 Like you, we're always looking for ways to take our game to the next level, and once upon a time this brought us to reassess our Rails views and Bootstrap front-end code.
 
-As most Rails projects at the time, the state of things were somewhat of a systematic mess: our Rails helpers had become a dumping ground with no real organization, filled with ugly HTML and CSS classes. Our views were using these helpers, but simply to just hide code away elsewhere without leveraging any techniques to further reusability. Our usage of partials vs. helpers was wrong and inconsistent. 
+As most Rails projects at the time, the state of things were somewhat of a mess: our Rails helpers had become a dumping ground with no real organization, filled with ugly HTML and CSS classes. Our views were using these helpers, but simply to just hide code away elsewhere without leveraging any techniques to further reusability. Our usage of partials vs. helpers was wrong and inconsistent. 
 
 Sound familiar? If it doesn't, you may want to check again.
 
 This flew by for a while, and even though we could've continued to cop out and blame it on the bad reputation that helpers get, we knew there had to be a better way. Besides, we were tired of stepping on our own toes when it came to making changes on the front-end.
 
-Unfortunately, helpers are not widely covered in the community. In general, good view layer architecture is touched upon very little by standard Rails documentation, with much of the spotlight going to the back-end heavy-lifting (controllers, models, migrations, routes). That's great and all, but can the front-end get a little love? Helpers you'll find documented out there on the internet are simply a mess of functions slung together. 
+Unfortunately, helpers are not widely covered by the Rails community. In general, good view layer architecture is touched upon very little by standard Rails documentation, with much of the spotlight going to the back-end heavy-lifting (controllers, models, migrations, routes). That's great and all, but can the front-end get a little love? Helpers you'll find documented out there on the internet are simply a mess of functions slung together. 
 
 Once we started seriously working on architecting our half-assed Bootstrap Rails one-method helpers into full-fledged models, we realized what an amazing exercise in Ruby, Rails, and Object Oriented Programming it was. And fun as hell to boot!
 
@@ -22,9 +22,9 @@ Once we started seriously working on architecting our half-assed Bootstrap Rails
 
 So, what makes us qualified to teach a course on any of these fronts?
 
-We're Ryan & Carlos, and we've been building web apps professionally for over 10 years (with Rails for 5 of those years). Rails has been out for 9 years at the time of this writing, so you could say we've been using exclusively Rails for the majority of the time it has been around.
+We're Ryan & Carlos, a couple of dudes who use Rails professionally and love it. We're passionate about doing things the right way&trade;, not only because it feels good, but because it actually makes writing code easier.
 
-We've built our consulting business on Rails, with the apps for all of our customers running a version from 2 to 4. Quite an investment to make in one particular technology, but it has never let us down!
+We've built our consulting business on Rails. Quite an investment to make in one particular technology, but it has never let us down!
 
 At the end of the day it's simple: we're a couple of guys very concerned with improving ourselves on the daily, much like you are.  We want to share what we've learned with you to help you get closer to reaching Rails enlightenment a bit faster than we did. 
 
@@ -53,6 +53,16 @@ If you're looking to output HTML dynamically generated based on some input (like
 link_to "Visit Other Site", "http://www.rubyonrails.org/", data: { confirm: "Are you sure?" }
 ```
 
+The more complex Rails `form_for` helper is a good example of an advanced helper (the kind we'll be getting into):
+
+
+```erb
+<%= form_for @person do |person_form| %>
+  Name: <%= person_form.text_field :name %>
+  Admin: <%= person_form.check_box :admin %>
+<% end %>
+```
+
 The meat of this course will go into how you can build helpers like these around front-end UI/UX patterns like those found in Bootstrap. Once you've studied the examples and learned the concepts, you can apply the same techniques to build helpers for any front-end framework of your choosing!
 
 ### Presenters
@@ -70,6 +80,10 @@ def publication_status
 end
 ```
 
+In general, if you need a value (in this case, the raw date `@model.published_at`) formatted nicely, you should employ a presenter to abstract code away from your view. Here we'll get `"5 days ago"` from something like `"2011-02-20 08:01:55.583222"`. 
+
+Your values can and should be stored in their most raw form, absent of any pretty formatting! Along with dates, this can also apply to currencies (adding the `"$"` and correct number of decimal places to `100.5`) or degrees of temperature (adding the &deg;F symbol to `75`).
+
 Helpers and presenters often and should work together to keep your code DRY (don't repeat yourself). For example, you might utilize a presenter inside of a helper, like so:
 
 ```ruby
@@ -84,26 +98,46 @@ See how that helps things stay clean?
 
 Although you can technically pass data into partials, don't use partials where helpers should be used. Here's an example of what not to do:
 
-```ruby
-# path/to/file.html.erb
-= render partial: 'something', locals: { title: 'xyz' }
-``` 
-
-```ruby
-# path/to/file.html.erb
-# TODO
-``` 
-
-This is a job for a helper? Why? [explanation]
-
-Partials should be used for layouts and where code is repeated, but whose markup does not change depending on what's passed in as arguments. Here's a good example of proper partial usage:
-
-```ruby
-# path/to/file.html.erb
-# TODO
+```erb
+<%# index.html.erb %>
+<%= render 'description_list', locals: { object: @person, attributes: [:first_name, :last_name, :email] } %>
 ```
 
-```ruby
-# path/to/file.html.erb
-# TODO
+```erb
+<%# _description_list.html.erb %>
+<% if @attributes.any? %>
+<dl class="<%= horizontal ? 'horizontal' : '' %>">
+   <% attributes.each do |attribute| %>
+      <dt><%= attribute.to_s.titleize %></dt>
+      <dd><%= @person.send(attribute) || "-" %></dd>
+   <% end %>
+</dl>
+<% end %>
 ```
+
+This is a job for a helper. Why? Since helpers are just Ruby you can make use of OOP techniques, store state, and implement complex logic in a modularized and unobtrusive way. As you'll soon start to learn, the above way is not very flexible. On top of that, it looks ugly (actually, identifying ugly code often goes a long way in helping you improve it)!
+
+In this course, we'll take something like the above Bootstrap definition list, and implement it in a much cleaner and more reusable way. You're going to *love* the result. Your code will too.
+
+Partials *should* be used for layouts and where code is repeated, but whose markup structure does not change depending on what's passed in as arguments. Here's a good example of proper partial usage:
+
+```erb
+<%# index.html.erb %>
+<h1>Products</h1>
+<%= render partial: 'product', collection: @products %>
+```
+
+```erb
+<%# _product.html.erb %>
+<p>Product Name: <%= product.name %></p>
+```
+
+The markup structure stays the same here; only the values change.
+
+### Summary
+
+In short, if the generation of HTML isn't involved, don't use a helper. If what you're trying to do is formatting-related, use a presenter. If neither applies, see if a partial makes sense, otherwise just stick it in the view!
+
+---
+
+It's okay if you're not 100% clear on the differences yet. Practice makes perfect, and what better way to start practicing than to write some bad ass helpers? Let's get to it!
