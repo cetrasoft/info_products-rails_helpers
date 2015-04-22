@@ -64,10 +64,10 @@ Before we take a look at some helper code, let's set the stage for what we want 
 ```erb
 <h1>Description Lists</h1>
 
-<%= description_list_for @person, [:first_name, :last_name, :email], true %>
+<%= description_list_for @person, [:first_name, :last_name, :email], :horizontal %>
 ```
 
-Our eventual `description_list_for` helper shown here will allow us to pass in an object (in this case, `@person`), an array of attributes, and whether or not we want the description list to display horizontally (here we do, with `true`).
+Our eventual `description_list_for` helper shown here will allow us to pass in an object (in this case, `@person`), an array of attributes, and which way we want the description list to be displayed (here we want a horizontal orientation).
 
 ***PROTIP:*** You might be asking, like we once were:
 
@@ -88,7 +88,7 @@ First, let's take a look at what our most basic implementation of a description 
 ### Example 0: base case (no helpers)
 
 ```erb
-<dl class='dl-horizontal'>
+<dl>
    <dt>First Name</dt>
    <dd><%= @person.first_name %></dd>
    <dt>Last Name</dt>
@@ -105,7 +105,7 @@ Now this looks good, but note there's a good deal of repetition going on here wi
 ### Example 1: helper for a single pair
 
 ```erb
-<dl class='dl-horizontal'>
+<dl>
    <%= description_list_pair "First Name", @person.first_name %>
    <%= description_list_pair "Last Name", @person.last_name %>
    <%= description_list_pair "Email", @person.email %>
@@ -158,7 +158,7 @@ Whew, okay, cool. Thing is though, we can still do better than this. With each a
 Check this out:
 
 ```erb
-<dl class='dl-horizontal'>
+<dl>
    <%= description_list_pair_for @person, :first_name %>
    <%= description_list_pair_for @person, :last_name %>
    <%= description_list_pair_for @person, :email %>
@@ -176,7 +176,7 @@ module DescriptionListHelper
   end
   
   def description_list_pair_for(record, attribute)
-    term        = attribute.to_s.titleize
+    term         = attribute.to_s.titleize
     description  = record.send(attribute)
   
     description_list_pair(term, description)
@@ -199,7 +199,7 @@ One way we could address this is by creating a loop.
 ### Example 3a: single pair helper in a loop
 
 ```erb
-<dl class='dl-horizontal'>
+<dl>
    <% [:first_name, :last_name, :email].each do |attribute| %>
       <%= description_list_pair_for @person, attribute %>
    <% end %>
@@ -213,7 +213,7 @@ What about this?
 ### Example 3b: the "one-liner"
 
 ```erb
-<%= description_list_for @person, [:first_name, :last_name, :email], true %>
+<%= description_list_for @person, [:first_name, :last_name, :email] %>
 ```
 
 Surely the Rails gods have smiled upon us. This one's only *slightly* more complicated.
@@ -232,19 +232,16 @@ module DescriptionListHelper
     # ...
   end
   
-  def description_list_for(record, attributes, horizontal = false)
+  def description_list_for(record, attributes)
     # TODO
   end
 end
 ```
 
-First, take a look at our method signature `description_list_for(record, attributes, horizontal = false)`. From following along above, you probably already have a good sense of why it looks like this, but as a reminder: 
+First, take a look at our method signature `description_list_for(record, attributes)`. From following along above, you probably already have a good sense of why it looks like this, but as a reminder: 
 
 - The `record` argument is for your model object,
-- `attributes` will be an array of symbols that specify attribute or property names (think `:first_name`, `:last_name`),
-- and horizontal indicates whether the description list should be styled to display horizontally or not (the default here, as you can see, is set to no, or `false`).
-
-For setup, let's right away get the style class for the description list (remember, the `<dl>` element), shall we?
+- `attributes` will be an array of symbols that specify attribute or property names (think `:first_name`, `:last_name`)
 
 ```ruby
 module DescriptionListHelper
@@ -256,19 +253,16 @@ module DescriptionListHelper
     # ...
   end
   
-  def description_list_for(record, attributes, horizontal = false)
-    style = horizontal ? 'dl-horizontal' : ''
+  def description_list_for(record, attributes)
     pairs = attributes.map { |a| description_list_pair_for(record, a) }
-    content_tag(:dl, safe_join(pairs), class: style)
+    content_tag(:dl, safe_join(pairs))
   end
 end
 ```
 
-A simple shorthand `if` statement that stores the horizontal style class in our `style` variable for use later if `horizontal` has been set to true. If it was set to false, it just stores a blank (nothing).
+Our first line starts by compiling our description list pairs. We do this because once we have all of our pairs, we'll just plop them into a `<dl>` and call it a day.
 
-With the next line, let's start compiling our description list pairs. We'll do this because once we have all of our pairs, we'll just plop them into a `<dl>` and call it a day.
-
-Here, using the `map` method, we'll iterate over the attributes and use each one along with the model object `record` as arguments to the `description_list_pair_for` method. The result will be a `<dt>` and `<dd>` pair added to our `pairs` array. You already know how `description_list_pair_for` works because we've already built it.
+Next, using the `map` method, we'll iterate over the attributes and use each one along with the model object `record` as arguments to the `description_list_pair_for` method. The result will be a `<dt>` and `<dd>` pair added to our `pairs` array. You already know how `description_list_pair_for` works because we've already built it.
 
 Finally, we add the last line where we create our `<dl>` description list tag with `content_for`. We pump in all of our description list pairs, which by now reside in the `pairs` array, and then `safe_join` them, readying them for HTML rendering. That looks like this:
 
@@ -280,14 +274,41 @@ $ safe_join(pairs)
 => '<dt>First Name</dt><dd>Ryan</dd><dt>Last Name</dt><dd>Jafari</dd><dt>Birthdate</dt><dd>-</dd>'
 ```
 
-When we call this last `content_for` line, the `safe_join(pairs)` content is wrapped by a `<dl>` with the horizontal class appended if we specified that we wanted a horizontal description list. Let's see what the last line gives us:
+When we call this last `content_for` line, the `safe_join(pairs)` content is wrapped by a `<dl>`.Let's see what the last line gives us:
 
 ```bash
-$ content_tag(:dl, safe_join(pairs), class: style)
-=> "<dl class='horizontal'><dt>First Name</dt><dd>Ryan</dd><dt>Last Name</dt><dd>Jafari</dd><dt>Birthdate</dt><dd>-</dd></dl>"
+$ content_tag(:dl, safe_join(pairs))
+=> "<dl><dt>First Name</dt><dd>Ryan</dd><dt>Last Name</dt><dd>Jafari</dd><dt>Birthdate</dt><dd>-</dd></dl>"
 ```
 
 That right there will be returned to our view and presented to our users in a browser with beautiful Bootstrap styling. We did it all in one line. Amazing. Are you amazed? Just about, we bet.
+
+#### What about that `dl-horizontal` option?
+
+Earlier we mentioned that we would be able to support the option to style the description list vertically or horizontally. This can be done with just a simple optional argument added to our
+`description_list_for` method
+
+```ruby
+module DescriptionListHelper
+  def description_list_pair(term, description)
+    # ...
+  end
+  
+  def description_list_pair_for(record, attribute)
+    # ...
+  end
+  
+  def description_list_for(record, attributes, orientation = nil)
+    style = orientation == :horizontal ? 'dl-horizontal' : ''
+    pairs = attributes.map { |a| description_list_pair_for(record, a) }
+    content_tag(:dl, safe_join(pairs), class: style)
+  end
+end
+```
+
+We use a simple shorthand `if` statement to store the style class to use on our list: `dl-horizontal` for a horizontal layout, nothing (the default) for a vertical layout. 
+
+Append that class to the main `<dl>` and we are done!
 
 ### Finished product
 
@@ -319,7 +340,7 @@ end
 ```erb
 <h1>Description Lists</h1>
 
-<%= description_list_for @person, [:first_name, :last_name, :email], true %>
+<%= description_list_for @person, [:first_name, :last_name, :email], :horizontal %>
 ```
 
 ---
