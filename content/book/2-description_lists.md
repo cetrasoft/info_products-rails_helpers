@@ -151,7 +151,7 @@ So, `description.presence || '-'` just says "if there is a description present, 
 
 ---
 
-Whew, okay, cool. Thing is though, we can still do better than this. With each argument to our `description_list_pair` method, we specify the type of information we want twice (`"First Name"` and `@person.first_name`, `"Email"` and `@person.emmail`, etc.) What if we could infer the name of term (such as `"First Name"`) using the attribute of the record (such as `@person.first_name`)?
+Whew, okay, cool. Thing is though, we can still do better than this. With each argument to our `description_list_pair` method, we specify the type of information we want twice (`"First Name"` and `@person.first_name`, `"Email"` and `@person.email`, etc.) What if we could infer the name of term (such as `"First Name"`) using the attribute of the record (such as `@person.first_name`)?
 
 ### Example 2: helper for a single pair, from a record
 
