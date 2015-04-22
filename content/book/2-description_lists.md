@@ -171,13 +171,9 @@ Whoa, whoa. What kind of black magic is going on here? True, there's a lot of ma
 
 ```ruby
 module DescriptionListHelper
-  # def description_list_pair(term, description)
-  #  tags = [
-  #    content_tag(:dt, term),
-  #    content_tag(:dd, description || '-')
-  #  ]
-  #  safe_join(tags)
-  # end
+  def description_list_pair(term, description)
+    # ...
+  end
   
   def description_list_pair_for(record, attribute)
     term        = attribute.to_s.titleize
@@ -228,20 +224,13 @@ Let's take this method one step at a time:
 
 ```ruby
 module DescriptionListHelper
-  # def description_list_pair(term, description)
-  #   tags = [
-  #     content_tag(:dt, term),
-  #     content_tag(:dd, description || '-')
-  #   ]
-  #   safe_join(tags)
-  # end
+  def description_list_pair(term, description)
+    # ...
+  end
   
-  # def description_list_pair_for(record, attribute)
-  #   term        = attribute.to_s.titleize
-  #   description  = record.send(attribute)
-  #
-  #   description_list_pair(term, description)
-  # end 
+  def description_list_pair_for(record, attribute)
+    # ...
+  end
   
   def description_list_for(record, attributes, horizontal = false)
     # TODO
@@ -259,20 +248,13 @@ For setup, let's right away get the style class for the description list (rememb
 
 ```ruby
 module DescriptionListHelper
-  # def description_list_pair(term, description)
-  #   tags = [
-  #     content_tag(:dt, term),
-  #     content_tag(:dd, description || '-')
-  #   ]
-  #   safe_join(tags)
-  # end
+  def description_list_pair(term, description)
+    # ...
+  end
   
-  # def description_list_pair_for(record, attribute)
-  #   term        = attribute.to_s.titleize
-  #   description  = record.send(attribute)
-  #
-  #   description_list_pair(term, description)
-  # end 
+  def description_list_pair_for(record, attribute)
+    # ...
+  end
   
   def description_list_for(record, attributes, horizontal = false)
     style = horizontal ? 'dl-horizontal' : ''
