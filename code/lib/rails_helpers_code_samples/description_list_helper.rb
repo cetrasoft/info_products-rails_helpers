@@ -16,8 +16,8 @@ module RailsHelpersCodeSamples
       description_list_pair(term, definition)
     end
 
-    def description_list_for(record, attributes, horizontal = false)
-      style = horizontal ? 'dl-horizontal' : ''
+    def description_list_for(record, attributes, orientation = nil)
+      style = orientation == :horizontal ? 'dl-horizontal' : ''
       pairs = attributes.map { |a| description_list_pair_for(record, a) }
 
       content_tag(:dl, safe_join(pairs), class: style)
