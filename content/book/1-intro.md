@@ -126,7 +126,7 @@ The markup structure stays the same here; only the values change.
 
 ### Summary
 
-In short, if the generation of HTML isn't involved, don't use a helper. If what you're trying to do is formatting-related, use a presenter. If neither applies, see if a partial makes sense, otherwise just stick it in the view!
+In short, if the generation of HTML isn't involved, don't use a helper. If what you're trying to do is formatting-related, use a presenter. If neither applies, see if a partial makes sense, otherwise it probably belongs directly in the view.
 
 ---
 
