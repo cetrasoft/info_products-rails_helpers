@@ -82,15 +82,7 @@ In general, if you need a value (in this case, the raw date `@article.published_
 
 Your values can and should be stored in their most raw form, absent of any pretty formatting! Along with dates, this can also apply to currencies (adding the `"$"` and correct number of decimal places to `100.5`) or degrees of temperature (adding the &deg;F symbol to `75`).
 
-Helpers and presenters often and should work together to keep your code DRY (don't repeat yourself). For example, you might utilize a presenter inside of a helper, like so:
-
-```ruby
-def helper
-    # TODO
-end
-```
-
-See how that helps things stay clean? 
+Helpers and presenters work together to keep your code DRY (don't repeat yourself), readable, and tidy.
 
 ### Partials
 
