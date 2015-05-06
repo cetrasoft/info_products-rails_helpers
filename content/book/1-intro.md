@@ -70,15 +70,15 @@ Presenters are used to return a "presentable" representation of some data, often
 
 ```ruby
 def publication_status
-  if @model.published_at?
-      h.time_ago_in_words(@model.published_at)
+  if @article.published_at?
+     time_ago_in_words(@article.published_at)
   else
-    'Draft'
+     'Draft'
   end
 end
 ```
 
-In general, if you need a value (in this case, the raw date `@model.published_at`) formatted nicely, you should employ a presenter to abstract code away from your view. Here we'll get `"5 days ago"` from something like `"2011-02-20 08:01:55.583222"`. 
+In general, if you need a value (in this case, the raw date `@article.published_at`) formatted nicely, you should employ a presenter to abstract code away from your view. Here we'll get `"5 days ago"` from something like `"2011-02-20 08:01:55.583222"`. 
 
 Your values can and should be stored in their most raw form, absent of any pretty formatting! Along with dates, this can also apply to currencies (adding the `"$"` and correct number of decimal places to `100.5`) or degrees of temperature (adding the &deg;F symbol to `75`).
 
