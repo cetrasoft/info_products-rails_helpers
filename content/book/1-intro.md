@@ -4,7 +4,7 @@
 
 If you're reading this, whether you're a novice, amateur, or professional developer, you're probably the type who takes investing in their continuing education seriously. You're always up-to-date with current methodologies and the latest tricks of your trade. Your thirst for the "perfect solution" or the "best way" is unquenchable. You subscribe to popular development blogs, have taken or are taking courses, and attend meetups. When faced with a challenge you'll travel far and wide to close the gap between a "good enough" solution and an elegant one.
 
-**You're serious about being damn good at what you do and it feels fantastic to be at the top of your game!**
+**You're serious about being good at what you do and it feels fantastic to be at the top of your game!**
 
 Like you, we're always looking for ways to take our game to the next level, and once upon a time this brought us to reassess our Rails views and Bootstrap front-end code.
 
@@ -16,7 +16,7 @@ This flew by for a while, and even though we could've continued to cop out and b
 
 Unfortunately, helpers are not widely covered by the Rails community. In general, good view layer architecture is touched upon very little by standard Rails documentation, with much of the spotlight going to the back-end heavy-lifting (controllers, models, migrations, routes). That's great and all, but can the front-end get a little love? Helpers you'll find documented out there on the internet are simply a mess of functions slung together. 
 
-Once we started seriously working on architecting our half-assed Bootstrap Rails one-method helpers into full-fledged models, we realized what an amazing exercise in Ruby, Rails, and Object Oriented Programming it was. And fun as hell to boot!
+Once we started seriously working on architecting our Bootstrap Rails one-method helpers into full-fledged models, we realized what an amazing exercise in Ruby, Rails, and Object Oriented Programming it was!
 
 ## Who we are
 
@@ -36,9 +36,7 @@ Your front-end frameworks *du jour* will come and go. On top of that, eventually
 
 Another thing: experienced developers know that there comes a time where you'll strongly disagree with a gem developer's design decisions. That's why there's forking! Learning from our examples will empower you to fork and modify code to suit your own needs in awesome ways that will blow other developers away.
 
-Learn to make your Rails views more modular, more scalable, and more sexy with us. Or for those of you "glass half-empty" people: make them suck less.
-
-So shall we?
+Learn to make your Rails views more modular and more scalable with us! So shall we?
 
 ## Helpers, presenters, partials... WTF!
 
@@ -140,4 +138,4 @@ In short, if the generation of HTML isn't involved, don't use a helper. If what 
 
 ---
 
-It's okay if you're not 100% clear on the differences yet. Practice makes perfect, and what better way to start practicing than to write some bad ass helpers? Let's get to it!
+It's okay if you're not 100% clear on the differences yet. Practice makes perfect, and what better way to start practicing than to write some helpers? Let's get to it!
