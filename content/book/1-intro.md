@@ -65,8 +65,8 @@ The meat of this course will go into how you can build helpers like these around
 
 ### Presenters
 
-Presenters are used to return a "presentable" representation of some data, often based on certain conditions. The below presenter will show a user vital information on if and when a post was published:
-
+Presenters are used to return a "presentable" representation of some data, often based on certain conditions.
+The below presenter will show a user if and when a post was published:
 
 ```ruby
 def publication_status
@@ -78,7 +78,19 @@ def publication_status
 end
 ```
 
-In general, if you need a value (in this case, the raw date `@article.published_at`) formatted nicely, you should employ a presenter to abstract code away from your view. Here we'll get `"5 days ago"` from something like `"2011-02-20 08:01:55.583222"`. 
+You use it in your view like this:
+
+```erb
+<article>
+  <%= @article.title %>
+  <%= @article.publication_status %>
+</article>
+```
+
+Since the `publication_status` method has been setup as a presenter, your `@article` model will now have that method available to it without needing to have it defined directly on it.
+
+In general, if you need a value (in this case, the raw date `@article.published_at`) formatted nicely, you should employ a presenter to abstract code away from your view.
+Here we'll get `"5 days ago"` as output from something like `"2011-02-20 08:01:55.583222"`.
 
 Your values can and should be stored in their most raw form, absent of any pretty formatting! Along with dates, this can also apply to currencies (adding the `"$"` and correct number of decimal places to `100.5`) or degrees of temperature (adding the &deg;F symbol to `75`).
 
@@ -128,6 +140,5 @@ The markup structure stays the same here; only the values change.
 
 In short, if the generation of HTML isn't involved, don't use a helper. If what you're trying to do is formatting-related, use a presenter. If neither applies, see if a partial makes sense, otherwise it probably belongs directly in the view.
 
----
-
-It's okay if you're not 100% clear on the differences yet. Practice makes perfect, and what better way to start practicing than to write some helpers? Let's get to it!
+It's okay if you're not 100% clear on the differences yet.
+Practice makes perfect, so let's get to writing some helpers!
