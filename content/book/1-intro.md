@@ -71,9 +71,9 @@ The below presenter will show a user if and when a post was published:
 ```ruby
 def publication_status
   if @article.published_at?
-     time_ago_in_words(@article.published_at)
+    time_ago_in_words(@article.published_at)
   else
-     'Draft'
+    'Draft'
   end
 end
 ```
@@ -108,12 +108,12 @@ Although you can technically pass data into partials, don't use partials where h
 ```erb
 <%# _description_list.html.erb %>
 <% if @attributes.any? %>
-<dl class="<%= horizontal ? 'horizontal' : '' %>">
-   <% attributes.each do |attribute| %>
+  <dl class="<%= horizontal ? 'horizontal' : '' %>">
+    <% attributes.each do |attribute| %>
       <dt><%= attribute.to_s.titleize %></dt>
       <dd><%= @person.send(attribute) || "-" %></dd>
-   <% end %>
-</dl>
+    <% end %>
+  </dl>
 <% end %>
 ```
 
