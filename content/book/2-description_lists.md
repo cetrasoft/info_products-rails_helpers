@@ -343,8 +343,6 @@ end
 <%= description_list_for @person, [:first_name, :last_name, :email], :horizontal %>
 ```
 
----
-
 *This is what it's all about people. If stuff like this doesn't get you pumped up, you're in the wrong line of work!*
 
 # Generic vs. project or domain-specific helper methods
