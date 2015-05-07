@@ -67,7 +67,7 @@ Before we take a look at some helper code, let's set the stage for what we want 
 <%= description_list_for @person, [:first_name, :last_name, :email], :horizontal %>
 ```
 
-Our eventual `description_list_for` helper shown here will allow us to pass in an object (in this case, `@person`), an array of attributes, and which way we want the description list to be displayed (here we want a horizontal orientation).
+Our eventual `description_list_for` helper shown here will allow us to pass in an object (in this case, `@person`), an array of attributes, and the orientation of the description list (here we want it to be displayed horizontally).
 
 ***PROTIP:*** You might be asking, like we once were:
 
@@ -274,7 +274,7 @@ $ safe_join(pairs)
 => '<dt>First Name</dt><dd>Ryan</dd><dt>Last Name</dt><dd>Jafari</dd><dt>Birthdate</dt><dd>-</dd>'
 ```
 
-When we call this last `content_for` line, the `safe_join(pairs)` content is wrapped by a `<dl>`.Let's see what the last line gives us:
+When we call this last `content_for` line, the `safe_join(pairs)` content is wrapped by a `<dl>`. Let's see what the last line gives us:
 
 ```bash
 $ content_tag(:dl, safe_join(pairs))
@@ -306,7 +306,7 @@ module DescriptionListHelper
 end
 ```
 
-We use a simple shorthand `if` statement to store the style class to use on our list: `dl-horizontal` for a horizontal layout, nothing (the default) for a vertical layout. 
+We use a simple shorthand `if` statement to store the style class to use on our list: `dl-horizontal` for a horizontal layout, or nothing (the default) for a vertical layout. 
 
 Append that class to the main `<dl>` and we are done!
 
