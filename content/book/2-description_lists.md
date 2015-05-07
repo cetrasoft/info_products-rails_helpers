@@ -4,7 +4,7 @@ Part of Bootstrap's typography CSS, description lists make perfect sense as an i
 
 Let's jump in and see what we're talking about here!
 
-First, let's get familiar with the structure of a description list. They look like this:
+First, let's get familiar with the structure of a description list. It looks like this:
 
 ![alt](../images/2-description_lists/example_1.png)
 
