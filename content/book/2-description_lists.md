@@ -165,7 +165,7 @@ Check this out:
 </dl>
 ```
 
-Whoa, whoa. What kind of black magic is going on here? True, there's a lot of magic with Rails, but it's not at all nefarious: Rails actually allows us to turn a symbol into a nice label! Let's go for another dip, shall we?
+In typical Ruby fashion, we can use a bit of meta-programming to turn an attribute symbol like `:first_name` into a nice label. Let's see how this is done:
 
 #### The `description_list_pair_for` helper method
 
