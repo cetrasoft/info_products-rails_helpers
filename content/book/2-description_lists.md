@@ -89,12 +89,12 @@ First, let's take a look at what our most basic implementation of a description 
 
 ```erb
 <dl>
-   <dt>First Name</dt>
-   <dd><%= @person.first_name %></dd>
-   <dt>Last Name</dt>
-   <dd><%= @person.last_name %></dd>
-   <dt>Email</dt>
-   <dd><%= @person.email %></dd>
+  <dt>First Name</dt>
+  <dd><%= @person.first_name %></dd>
+  <dt>Last Name</dt>
+  <dd><%= @person.last_name %></dd>
+  <dt>Email</dt>
+  <dd><%= @person.email %></dd>
 </dl>
 ```
 
@@ -106,9 +106,9 @@ Now this looks good, but note there's a good deal of repetition going on here wi
 
 ```erb
 <dl>
-   <%= description_list_pair "First Name", @person.first_name %>
-   <%= description_list_pair "Last Name", @person.last_name %>
-   <%= description_list_pair "Email", @person.email %>
+  <%= description_list_pair "First Name", @person.first_name %>
+  <%= description_list_pair "Last Name", @person.last_name %>
+  <%= description_list_pair "Email", @person.email %>
 </dl>
 ```
 
@@ -159,9 +159,9 @@ Check this out:
 
 ```erb
 <dl>
-   <%= description_list_pair_for @person, :first_name %>
-   <%= description_list_pair_for @person, :last_name %>
-   <%= description_list_pair_for @person, :email %>
+  <%= description_list_pair_for @person, :first_name %>
+  <%= description_list_pair_for @person, :last_name %>
+  <%= description_list_pair_for @person, :email %>
 </dl>
 ```
 
@@ -200,9 +200,9 @@ One way we could address this is by creating a loop.
 
 ```erb
 <dl>
-   <% [:first_name, :last_name, :email].each do |attribute| %>
-      <%= description_list_pair_for @person, attribute %>
-   <% end %>
+  <% [:first_name, :last_name, :email].each do |attribute| %>
+    <%= description_list_pair_for @person, attribute %>
+  <% end %>
 </dl>
 ```
 
