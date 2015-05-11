@@ -69,8 +69,8 @@ Presenters are used to return a "presentable" representation of some data, often
 The below presenter will show a user if and when a post was published:
 
 ```ruby
-def publication_status
-  if @article.published_at?
+def published_at
+  if @article.published_at
     time_ago_in_words(@article.published_at)
   else
     'Draft'
@@ -78,16 +78,14 @@ def publication_status
 end
 ```
 
-You use it in your view like this:
+Assuming `@article` is an instance of your presenter which wraps the original model, you use it in your view like this:
 
 ```erb
 <article>
   <%= @article.title %>
-  <%= @article.publication_status %>
+  <%= @article.published_at %>
 </article>
 ```
-
-Since the `publication_status` method has been setup as a presenter, your `@article` model will now have that method available to it without needing to have it defined directly on it.
 
 In general, if you need a value (in this case, the raw date `@article.published_at`) formatted nicely, you should employ a presenter to abstract code away from your view.
 Here we'll get `"5 days ago"` as output from something like `"2011-02-20 08:01:55.583222"`.
