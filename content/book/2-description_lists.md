@@ -188,7 +188,12 @@ First, we convert `attribute` to a string (since in our example it's a symbol li
 
 Lastly, we get the value of the model's attribute using `record.send(attribute)`. We store that in our `description` variable, which will eventually be used in constructing the description element (`<dd>`) that accompanies our term element (`<dt>`) above.
 
-Then, we simply call `description_list_pair`, the method we built prior.
+Finally, we simply call `description_list_pair`, the method we built prior. It's easy to just write that last line in and miss an opportunity to let an important take-away from this chapter sink in: **building methods that do more from methods that do less.**
+
+The `description_list_pair_for` method is a logical extension of the previous `description_list_pair` method. The former achieves more through the ground work we've laid down with the latter. Think of your favorite brick-based building toy. Each individual brick can stand alone, but a few of those pieces together can make a more impressive module. A bunch of those modules can make something really special.
+
+We could have copy and pasted the code from inside the first helper into the new one, but instead we've used the first within the new one by calling it. This allows us to have two useable methods without writing duplicate code, with one building on the work of the other. You'll see this pattern continue in future examples!
+
 
 ---
 
@@ -345,19 +350,17 @@ end
 
 *This is what it's all about people. If stuff like this doesn't get you pumped up, you're in the wrong line of work!*
 
-# Generic vs. project or domain-specific helper methods
+# Generic helper methods
 
-It's nearly always prudent to separate project or domain-specific functionality from generic functionality when possible, building the former on top of the latter. This way, you can DRY (don't repeat yourself) up your code by leveraging the generic functionality in other areas of your application, or even other completely different applications you build in the future. Building larger and more complex code from smaller, simpler code is always a good rule of thumb for coding in general, and as you saw, our Rails Bootstrap helpers were no exception!
+The description list helper methods we've built here are generic. Why? Because they can be used across different Rails projects, provided that whatever record you pass in will respond to a method with the same name as each attribute you pass in (or you'd get an error).
 
-Let's go back. The `description_list_for` method we wrote is our most project-specific method in our `DescriptionListHelper` module. It is the method we directly use in our views to render beautiful description lists. It is not reusable across projects. What about the `description_list_pair_for` method?
+The methods output standard HTML, so they can easily be used across many different  projects, even those not using Bootstrap! If you find yourself using generic modules like this from project to project, consider keeping them in your `lib` folder.
 
-This method is still project-specific. It's in this method that we can make assumptions about how it's being used in our application. What does this mean? It means we can place any kind of domain-specific logic here, if we wanted to. For example, we might decide we want to truncate the property value that will be inserted into a `<dd>`, based on some if/else logic that's specific to our "Widgets" application. For demo purposes here, we illustrate the project-specific nature in a simpler way, with a simple `titleize`.
+# Conclusion
 
-It follows then that the `description_list_pair_for` method is *not* reusable across projects. That's okay though, because not all methods should be.
+Remember, you can keep using these helpers to build ones that perform increasingly heavier lifting. The modularity of the helpers will ensure that you won't end up with a giant brittle helper that can never be changed. **Always make sure you're using small and simple helpers to build big and complex helpers and you'll be on the right track.**
 
-The `description_list_pair` method *is* generic. Why? It takes two string values and puts them into the standard `<dl>` structure. It doesn't attempt to do anything fancy or project-specific, and because a `<dl>` construct is HTML, it can easily be used across many different (web) projects (even those not using Bootstrap!) and probably belongs in the lib folder.
-
-Remember, you can keep using the smaller pieces (here the generic `description_list_pair` method) to build bigger, more comprehensive helpers. The modularity of the smaller helpers will ensure that you won't end up with a giant brittle helper that can never be changed.
+Sometimes architecting larger components from smaller ones is difficult to conceptualize, and may not happen right away when your main concern is getting something to work. That's okay, and sometimes it's best to just build something out and keep track of ideas for how to reorganize your code for later. It's important to keep coding in this way a priority, because the more you practice you have the better you'll become.
 
 # Further study
 
